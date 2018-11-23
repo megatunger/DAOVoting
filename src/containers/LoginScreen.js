@@ -1,0 +1,23 @@
+/**
+*
+* LoginScreen
+*
+*/
+
+import React from 'react';
+import {Container} from 'unstated';
+
+
+class LoginScreen extends Container { // eslint-disable-line react/prefer-stateless-function
+// init state
+state = { };
+
+/**
+* manage and mutate state here
+*/
+
+}
+
+
+
+export default LoginScreen;
