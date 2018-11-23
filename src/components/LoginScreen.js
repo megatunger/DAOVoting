@@ -17,8 +17,10 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView
 } from 'react-native';
+import axios from 'axios';
 import { Subscribe } from 'unstated';
 import { Title } from '../elements/Title.js';
+import { API } from '../../config';
 //TODo import your slyte from elements
 //TODO import your container you want to Subscribe
 
@@ -37,7 +39,8 @@ export class LoginScreenView extends React.Component {
 
   onLogin() {
     const { username, password } = this.state;
-
+    // TODO call api to auth user
+    //axios.get(`API/auth?username=${username}&password=${password}`).then();
     // Alert.alert('Credentials', `${username} + ${password}`);
     this.props.navigation.navigate('App');
   }
