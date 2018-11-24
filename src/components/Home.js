@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {Avatar} from 'react-native-elements';
+import {Image, StatusBar, SafeAreaView, View, Text, StyleSheet,Button } from 'react-native';
 import CounterContainer from '../containers/CounterContainer';
 import { Card } from '../elements/Card';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeContainer from '../containers/HomeContainer';
 import { Subscribe } from 'unstated';
 
@@ -11,12 +13,27 @@ import { Subscribe } from 'unstated';
 class HomeView extends React.Component {
   render() {
     return (
-      <View>
-        <Text>{this.props.data.state.name}</Text>
-        <Text>Count in counter</Text>
-        <Text>{this.props.count.state.count}</Text>
-        <Card name={this.props.data.state.name} />
-      </View>
+      <SafeAreaView style={styles.container}>
+        <StatusBar hidden={true} />
+        <View style={{flex: 1, flexDirection: 'row', marginTop:30, marginBottom: 30, marginLeft:30, marginRight:30, justifyContent: 'space-between'}}>
+          <Icon
+                    name="bars"
+                    color='#FFFFFF'
+                    size={30}
+                />
+          <Image
+          style={{ width: 190/1.8, height: 66/1.8 }}
+          source={require('../images/logo3.png')}
+          />
+          <Avatar  
+            medium
+            rounded
+            source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
+            onPress={() => console.log("Works!")}
+            activeOpacity={0.7}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -33,3 +50,22 @@ export class Home extends React.Component {
     );
   }
 }
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#392E42'
+  },
+  input: {
+    width: 300,
+    height: 45,
+    padding: 10,
+    borderWidth: 1,
+    marginBottom: 20,
+    backgroundColor: 'rgba(197,197,197,0.35)',
+    borderRadius: 5
+  }
+});
