@@ -57,11 +57,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 5,
-    width: Dimensions.get('window').width - 20,
+    width: Dimensions.get('window').width - 50,
     height: 150,
     flexDirection: 'row',
     justifyContent: 'center',
-    margin: 20,
+    marginLeft: 8,
+    marginBottom: 30,
     borderRadius: 5
   },
   left: { width: '50%', alignItems: 'center', padding: 10 },
