@@ -27,12 +27,20 @@ class AddProposalContainer extends Container {
     if (this.state.token < 60) this.setState({ token: this.state.token + 1 });
   };
   decToken = () => {
-    console.log('decre');
-
     if (this.state.token > 0) this.setState({ token: this.state.token - 1 });
   };
   postPropersal = () => {
-    axios.post();
+    const url = `${API}/proposal`;
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: token
+      },
+      data: JSON.stringify(this.state),
+      url
+    };
+    axios(options).then(res => console.log(res));
   };
 }
 

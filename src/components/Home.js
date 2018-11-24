@@ -11,7 +11,8 @@ import {
   ScrollView,
   Touchable,
   TouchableOpacity,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Dimensions
 } from 'react-native';
 import CounterContainer from '../containers/CounterContainer';
 import { Card } from '../elements/Card';
@@ -19,7 +20,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeContainer from '../containers/HomeContainer';
 import { Subscribe } from 'unstated';
 import ActionSheet from 'react-native-actionsheet';
-
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  chartConfig
+} from 'react-native-chart-kit';
 /**
  * Build up screen
  */
@@ -37,10 +45,10 @@ export class HomeView extends React.Component {
           <ActionSheet
             style={{ height: 1 }}
             ref={o => (this.ActionSheet = o)}
-            title={'Which one do you like ?'}
-            options={['Apple', 'Banana', 'cancel']}
+            title={'Filter'}
+            options={['Voting Now', 'Ended Polls', 'cancel']}
             cancelButtonIndex={2}
-            destructiveButtonIndex={1}
+            destructiveButtonIndex={0}
             onPress={index => {
               /* do something */
             }}
@@ -73,20 +81,35 @@ export class HomeView extends React.Component {
             <Avatar
               medium
               rounded
-              source={{
-                uri:
-                  'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'
-              }}
+              source={require('../images/Face.png')}
               onPress={() => console.log('Works!')}
               activeOpacity={0.7}
             />
           </View>
+          <Text style={{fontSize: 25,
+                fontWeight: '700',
+                letterSpacing: 0.36,
+                color: '#ffffff',
+                marginLeft: 30,
+                marginBottom: 20,
+            }}>
+                Voting Now
+          </Text>
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Card nav={this.props.navigation} />
             <Card nav={this.props.navigation} />
             <Card nav={this.props.navigation} />
             <Card nav={this.props.navigation} />
           </View>
+          <Text style={{fontSize: 25,
+                fontWeight: '700',
+                letterSpacing: 0.36,
+                color: '#ffffff',
+                marginLeft: 30,
+                marginBottom: 20,
+            }}>
+                Ended Polls
+          </Text>
         </SafeAreaView>
       </ScrollView>
     );
