@@ -61,8 +61,8 @@ class HomeView extends React.Component {
         </View>
         <ActionSheet
           ref={o => (this.ActionSheet = o)}
-          title={'Which one do you like ?'}
-          options={['Apple', 'Banana', 'cancel']}
+          title={'Filter'}
+          options={['Voting Now', 'Ended Polls', 'Cancel']}
           cancelButtonIndex={2}
           destructiveButtonIndex={1}
           onPress={index => {
