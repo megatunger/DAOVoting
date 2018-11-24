@@ -11,7 +11,8 @@ import {
   ScrollView,
   Touchable,
   TouchableOpacity,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Dimensions
 } from 'react-native';
 import CounterContainer from '../containers/CounterContainer';
 import { Card } from '../elements/Card';
@@ -19,7 +20,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeContainer from '../containers/HomeContainer';
 import { Subscribe } from 'unstated';
 import ActionSheet from 'react-native-actionsheet';
-
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  chartConfig
+} from 'react-native-chart-kit';
 /**
  * Build up screen
  */
@@ -93,6 +101,15 @@ export class HomeView extends React.Component {
             <Card nav={this.props.navigation} />
             <Card nav={this.props.navigation} />
           </View>
+          <Text style={{fontSize: 25,
+                fontWeight: '700',
+                letterSpacing: 0.36,
+                color: '#ffffff',
+                marginLeft: 30,
+                marginBottom: 20,
+            }}>
+                Ended Polls
+          </Text>
         </SafeAreaView>
       </ScrollView>
     );
