@@ -4,14 +4,22 @@ import Dialog, {
   DialogContent,
   DialogButton,
   SlideAnimation,
-  ScaleAnimation,
+  ScaleAnimation
 } from 'react-native-popup-dialog';
 import { CheckBox, size, Button } from 'react-native-elements';
-import { Image, StyleSheet, View, Text, Dimensions, borderRightWidth, border } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  borderRightWidth,
+  border
+} from 'react-native';
 import CounterContainer from '../containers/CounterContainer';
 import { Subscribe } from 'unstated';
 import { LineChart } from 'react-native-chart-kit';
-import { CardDetails} from '../elements/CardDetails';
+import { CardDetails } from '../elements/CardDetails';
 import { colors } from 'react-native-elements';
 console.disableYellowBox = true;
 class CounterView extends React.Component {
@@ -19,106 +27,125 @@ class CounterView extends React.Component {
     super(props);
 
     this.state = {
-      checked: false,
+      yesChecked: true,
+      noChecked: false
     };
   }
-  
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <View style={{
-          marginTop: -400,
-          maxHeight: 300,
-        }}>
-              <Image source={require('../images/canteen.png')}>
-              </Image>
+        <View style={styles.container}>
+          <View
+            style={{
+              marginTop: -400,
+              maxHeight: 300
+            }}
+          >
+            <Image source={require('../images/canteen.png')} />
+          </View>
+          <Button
+            title="VOTE"
+            buttonStyle={{
+              marginTop: 40,
+              backgroundColor: '#00C091',
+              width: 159,
+              height: 60,
+              borderColor: 'transparent',
+              borderWidth: 0,
+              borderRadius: 5
+            }}
+            onPress={() => {
+              this.setState({
+                defaultAnimationDialog: true
+              });
+            }}
+          />
         </View>
-        <Button
-          title="VOTE"
-          buttonStyle={{
-            marginTop: 40,
-            backgroundColor: '#00C091',
-            width: 159,
-            height: 60,
-            borderColor: 'transparent',
-            borderWidth: 0,
-            borderRadius: 5
+
+        <Dialog
+          onDismiss={() => {
+            this.setState({ defaultAnimationDialog: false });
           }}
-          onPress={() => {
-            this.setState({
-              defaultAnimationDialog: true,
-            });
-          }}
-        />
+          width={0.9}
+          visible={this.state.defaultAnimationDialog}
+          rounded
+          dialogTitle={
+            <DialogTitle
+              title="You are about to spend 5 TOKENS on this decision. You can only choose YES or NO."
+              style={{
+                backgroundColor: '#F7F7F8'
+              }}
+              hasTitleBar={false}
+              align="center"
+            />
+          }
+          actions={[
+            <DialogButton
+              text="Cancel"
+              onPress={() => {
+                this.setState({ defaultAnimationDialog: false });
+              }}
+              key="button-1"
+            />,
+            <DialogButton
+              text="Confirm"
+              onPress={() => {
+                this.setState({ defaultAnimationDialog: false });
+              }}
+              key="button-2"
+            />
+          ]}
+        >
+          <DialogContent
+            style={{
+              backgroundColor: '#F7F7F8'
+            }}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                width: 150,
+                height: 75,
+                marginLeft: 50,
+                marginTop: 10
+              }}
+            >
+              <CheckBox
+                center="true"
+                title="No"
+                checkedColor="#00C091"
+                checkedIcon="check-circle"
+                uncheckedIcon="circle"
+                size={40}
+                wrapperStyle="center"
+                checked={this.state.noChecked}
+                onPress={() =>
+                  this.setState({
+                    noChecked: !this.state.noChecked,
+                    yesChecked: !this.state.yesChecked
+                  })
+                }
+              />
+              <CheckBox
+                center="true"
+                title="Yes"
+                checkedColor="#00C091"
+                checkedIcon="check-circle"
+                size={40}
+                uncheckedIcon="circle"
+                checked={this.state.yesChecked}
+                onPress={() =>
+                  this.setState({
+                    noChecked: !this.state.noChecked,
+                    yesChecked: !this.state.yesChecked
+                  })
+                }
+              />
+            </View>
+          </DialogContent>
+        </Dialog>
       </View>
-
-                      <Dialog
-                        onDismiss={() => {
-                          this.setState({ defaultAnimationDialog: false });
-                        }}
-                        width={0.9}
-                        visible={this.state.defaultAnimationDialog}
-                        rounded
-                        dialogTitle={
-                          <DialogTitle
-                            title="You are about to spend 5 TOKENS on this decision. You can only choose YES or NO."
-                            style={{
-                              backgroundColor: '#F7F7F8',
-                            }}
-                            hasTitleBar={false}
-                            align="center"
-                          />
-                        }
-                        actions={[
-                          <DialogButton
-                            text="Cancel"
-                            onPress={() => {
-                              this.setState({ defaultAnimationDialog: false });
-                            }}
-                            key="button-1"
-                          />,
-                          <DialogButton
-                            text="Confirm"
-                            onPress={() => {
-                              this.setState({ defaultAnimationDialog: false });
-                            }}
-                            key="button-2"
-                          />,
-                        ]}
-                      >
-                        <DialogContent
-                          style={{
-                            backgroundColor: '#F7F7F8',
-                          }}
-                        >
-                        <View style={{flexDirection: "row", width: 150, height: 75, marginLeft: 50, marginTop:10}}>
-                          <CheckBox
-                            center='true'
-                            title='No'
-                            checkedColor='#00C091'
-                            checkedIcon='check-circle'
-                            uncheckedIcon='circle'
-                            size={40}
-                            wrapperStyle='center'
-                            checked={this.state.checked}
-                            onPress={() => this.setState({ checked: !this.state.checked })}
-                          />
-                          <CheckBox
-                            center='true'
-                            title='Yes'
-                            checkedColor='#00C091'
-                            checkedIcon='check-circle'
-                            size={40}
-                            uncheckedIcon='circle'
-                            checked={this.state.checked}
-                            onPress={() => this.setState({ checked: !this.state.checked })}
-                          />
-                        </View>
-                        </DialogContent>
-                      </Dialog>
-
-    </View>
     );
   }
 }
@@ -128,7 +155,7 @@ export class Counter extends React.Component {
     customBackgroundDialog: false,
     defaultAnimationDialog: false,
     scaleAnimationDialog: false,
-    slideAnimationDialog: false,
+    slideAnimationDialog: false
   };
 
   render() {
@@ -153,29 +180,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F7F7',
     // opacity: 0.4,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   navigationBar: {
     borderBottomColor: '#b5b5b5',
     borderBottomWidth: 0.5,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff'
   },
   navigationTitle: {
-    padding: 10,
+    padding: 10
   },
   navigationButton: {
-    padding: 10,
+    padding: 10
   },
   navigationLeftButton: {
     paddingLeft: 20,
-    paddingRight: 40,
+    paddingRight: 40
   },
   navigator: {
-    flex: 1,
+    flex: 1
     // backgroundColor: '#000000',
   },
   customBackgroundDialog: {
     opacity: 0.5,
-    backgroundColor: '#000',
+    backgroundColor: '#000'
   }
 });

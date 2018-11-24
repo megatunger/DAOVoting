@@ -8,7 +8,10 @@ import {
   Text,
   StyleSheet,
   Button,
-  ScrollView
+  ScrollView,
+  Touchable,
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from 'react-native';
 import CounterContainer from '../containers/CounterContainer';
 import { Card } from '../elements/Card';
@@ -20,7 +23,7 @@ import ActionSheet from 'react-native-actionsheet';
 /**
  * Build up screen
  */
-class HomeView extends React.Component {
+export class HomeView extends React.Component {
   showActionSheet = () => {
     this.ActionSheet.show();
   };
@@ -79,10 +82,10 @@ class HomeView extends React.Component {
             />
           </View>
           <View style={{ flex: 1, alignItems: 'center' }}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card nav={this.props.navigation} />
+            <Card nav={this.props.navigation} />
+            <Card nav={this.props.navigation} />
+            <Card nav={this.props.navigation} />
           </View>
         </SafeAreaView>
       </ScrollView>
