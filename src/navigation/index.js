@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { HomeView } from '../components/Home';
 import { Counter } from '../components/Counter';
 import { LoginScreen, LoginScreenView } from '../components/LoginScreen';
+import { AddProposal } from '../components/AddProposal';
 
 const propersal = createStackNavigator({
   home: { screen: HomeView, navigationOptions: { header: null } },
@@ -24,7 +25,7 @@ export const app = createBottomTabNavigator(
       })
     },
     'Add Proposal': {
-      screen: Counter,
+      screen: AddProposal,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <Icon name="plus-circle" color={tintColor} size={24} />
