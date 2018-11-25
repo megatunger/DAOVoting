@@ -31,10 +31,8 @@ class AddProposalContainer extends Container {
     if (this.state.token > 0) this.setState({ token: this.state.token - 1 });
   };
   postPropersal = async () => {
-    console.log('post');
     let a = await AsyncStorage.getItem('user');
     a = JSON.parse(a);
-    console.log('user', a.payload.token);
 
     const url = `${API}/proposal`;
     const options = {

@@ -15,7 +15,7 @@ export const Card = props => {
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        props.nav.navigate('detail');
+        props.nav.navigate('detail', { data: props.data });
       }}
     >
       <LinearGradient
