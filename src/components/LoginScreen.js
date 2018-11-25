@@ -13,7 +13,7 @@ import {
   StatusBar,
   TextInput,
   SafeAreaView,
-  Keyboard,
+  AsyncStorage,
   TouchableOpacity,
   KeyboardAvoidingView
 } from 'react-native';
@@ -37,11 +37,20 @@ export class LoginScreenView extends React.Component {
     };
   }
 
-  onLogin() {
+  async onLogin() {
+    //let user;
     const { username, password } = this.state;
-    // TODO call api to auth user
-    //axios.get(`API/auth?username=${username}&password=${password}`).then();
-    // Alert.alert('Credentials', `${username} + ${password}`);
+
+    let res = await axios.get(`${API}/user/auth`, {
+      params: {
+        username: username,
+        password: password
+      }
+    });
+    let user = res.data;
+    this.setState({ user });
+    let a = JSON.stringify(user);
+    AsyncStorage.setItem('user', a);
     this.props.navigation.navigate('App');
   }
 
@@ -100,7 +109,7 @@ export class LoginScreenView extends React.Component {
         <View stlye={styles.input}>
           <Button
             title={'Sign in'}
-            onPress={this.onLogin.bind(this)}
+            onPress={() => this.onLogin()}
             buttonStyle={{
               marginTop: 40,
               backgroundColor: '#00C091',

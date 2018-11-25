@@ -4,17 +4,14 @@ import {
 } from 'react-navigation';
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { HomeView } from '../components/Home';
+import Home, { HomeView } from '../components/Home';
 import { Counter } from '../components/Counter';
 import { LoginScreen, LoginScreenView } from '../components/LoginScreen';
-<<<<<<< HEAD
 import { AddProposal } from '../components/AddProposal';
-=======
 import { MyproposalView } from '../components/Myproposal';
->>>>>>> 1298f53314105977f921dc02e7a695182cfeb104
-
+import HomeCon from '../containers/Home';
 const propersal = createStackNavigator({
-  home: { screen: HomeView, navigationOptions: { header: null } },
+  home: { screen: Home, navigationOptions: { header: null } },
   detail: { screen: Counter, navigationOptions: { header: null } }
 });
 export const auth = createStackNavigator({ LoginScreen: LoginScreenView });

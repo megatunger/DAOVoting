@@ -8,7 +8,8 @@ import React from 'react';
 import { Container } from 'unstated';
 import axios from 'axios';
 import { API } from '../../config';
-
+import { Text, AsyncStorage } from 'react-native';
+import { __await } from 'tslib';
 class AddProposalContainer extends Container {
   // eslint-disable-line react/prefer-stateless-function
   // init state
@@ -29,18 +30,27 @@ class AddProposalContainer extends Container {
   decToken = () => {
     if (this.state.token > 0) this.setState({ token: this.state.token - 1 });
   };
-  postPropersal = () => {
+  postPropersal = async () => {
+    console.log('post');
+    let a = await AsyncStorage.getItem('user');
+    a = JSON.parse(a);
+    console.log('user', a.payload.token);
+
     const url = `${API}/proposal`;
     const options = {
       method: 'POST',
       headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        token: token
+        'content-type': 'application/json'
       },
       data: JSON.stringify(this.state),
       url
     };
-    axios(options).then(res => console.log(res));
+    axios.defaults.headers.common['Authorization'] = a.payload.token;
+    try {
+      await axios(options);
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 

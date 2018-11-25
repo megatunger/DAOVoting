@@ -64,7 +64,7 @@ export class AddProposalView extends React.Component {
               size={36}
             />
           </View>
-          <Button title="SUBMIt" />
+          <Button title="SUBMIT" onPress={() => propersal.postPropersal()} />
         </View>
       </View>
     );

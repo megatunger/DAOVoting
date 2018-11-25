@@ -14,28 +14,24 @@ import {
   TouchableWithoutFeedback,
   Dimensions
 } from 'react-native';
-import CounterContainer from '../containers/CounterContainer';
 import { Card } from '../elements/Card';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import HomeContainer from '../containers/HomeContainer';
+import HomeCon from '../containers/Home';
 import { Subscribe } from 'unstated';
 import ActionSheet from 'react-native-actionsheet';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  chartConfig
-} from 'react-native-chart-kit';
+import { withNavigation } from 'react-navigation';
 /**
  * Build up screen
  */
 export class HomeView extends React.Component {
+  componentDidMount() {
+    this.props.home.getProposal();
+  }
   showActionSheet = () => {
     this.ActionSheet.show();
   };
   render() {
+    const { home } = this.props;
     return (
       <ScrollView
         style={styles.container}
@@ -86,29 +82,40 @@ export class HomeView extends React.Component {
               activeOpacity={0.7}
             />
           </View>
-          <Text style={{fontSize: 25,
-                fontWeight: '700',
-                letterSpacing: 0.36,
-                color: '#ffffff',
-                marginLeft: 30,
-                marginBottom: 20,
-            }}>
-                Voting Now
+          <Text
+            style={{
+              fontSize: 25,
+              fontWeight: '700',
+              letterSpacing: 0.36,
+              color: '#ffffff',
+              marginLeft: 30,
+              marginBottom: 20
+            }}
+          >
+            Voting Now
           </Text>
           <View style={{ flex: 1, alignItems: 'center' }}>
-            <Card nav={this.props.navigation} />
-            <Card nav={this.props.navigation} />
-            <Card nav={this.props.navigation} />
-            <Card nav={this.props.navigation} />
+            {home.state.proposals ? (
+              home.state.proposals.payload.map((item, index) => {
+                return (
+                  <Card key={index} data={item} nav={this.props.navigation} />
+                );
+              })
+            ) : (
+              <Text>asdas</Text>
+            )}
           </View>
-          <Text style={{fontSize: 25,
-                fontWeight: '700',
-                letterSpacing: 0.36,
-                color: '#ffffff',
-                marginLeft: 30,
-                marginBottom: 20,
-            }}>
-                Ended Polls
+          <Text
+            style={{
+              fontSize: 25,
+              fontWeight: '700',
+              letterSpacing: 0.36,
+              color: '#ffffff',
+              marginLeft: 30,
+              marginBottom: 20
+            }}
+          >
+            Ended Polls
           </Text>
         </SafeAreaView>
       </ScrollView>
@@ -119,16 +126,16 @@ export class HomeView extends React.Component {
 /**
  * Subscribe to container to get data
  */
-export class Home extends React.Component {
+class Home extends React.Component {
   render() {
     return (
-      <Subscribe to={[HomeContainer, CounterContainer]}>
-        {(home, count) => <HomeView data={home} count={count} />}
+      <Subscribe to={[HomeCon]}>
+        {home => <HomeView home={home} navigation={this.props.navigation} />}
       </Subscribe>
     );
   }
 }
-
+export default withNavigation(Home);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
